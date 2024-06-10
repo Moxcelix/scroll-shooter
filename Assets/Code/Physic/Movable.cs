@@ -3,15 +3,17 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Movable : MonoBehaviour
 {
-    const float groundedRadius = .2f;
+    private const float groundedMinDistance = .01f;
+    private const float wallMinDistance = .1f;
 
     [SerializeField] private float _speed;
-    [SerializeField] private float _jumpSpeed;
+    [SerializeField] private float _jumpForce;
+    [SerializeField] private float _dampingSpeed;
     [SerializeField] private LayerMask _whatIsGround;
     [SerializeField] private Transform _groundCheck;
+    [SerializeField] private BoxCollider2D _bodyCollider;
 
     private Rigidbody2D _rigidbody;
-    private Vector3 _moveVelocity;
 
     public bool IsGrounded { get; private set; }
 
@@ -28,40 +30,49 @@ public class Movable : MonoBehaviour
 
     private void FixedUpdate()
     {
-        UpdateJumping(Time.fixedDeltaTime);
-        UpdateMoving(Time.fixedDeltaTime);
         CheckGround();
-
-        _rigidbody.MovePosition(
-            transform.position + _moveVelocity * Time.fixedDeltaTime);
+        UpdateJumping();
+        UpdateMoving(Time.fixedDeltaTime);
     }
 
-    private void UpdateJumping(float deltaTime)
+    private void UpdateJumping()
     {
-        if (IsGrounded)
+        if (IsGrounded && Jumping)
         {
-            _moveVelocity.y = Jumping ? _jumpSpeed : 0;
-        }
-        else
-        {
-            _moveVelocity += Physics.gravity * deltaTime;
+            IsGrounded = false;
+
+            _rigidbody.AddForce(_jumpForce * Vector2.up);
         }
     }
 
     private void UpdateMoving(float deltaTime)
     {
         var rightMove = RightMoving ? _speed : 0;
-        var leftMove = RightMoving ? _speed : 0;
-
+        var leftMove = LeftMoving ? _speed : 0;
         var move = rightMove - leftMove;
+        var isTouchingWall = Physics2D.Raycast(
+          _groundCheck.position,
+          transform.right * Mathf.Sign(move),
+          _bodyCollider.size.x * 0.5f + wallMinDistance,
+          _whatIsGround);
 
-        _moveVelocity.x = Mathf.Lerp(_moveVelocity.x, move, deltaTime);
+        var moveHorizontal = Mathf.Lerp(
+            _rigidbody.velocity.x, move,
+            deltaTime * _dampingSpeed);
+
+        if (isTouchingWall)
+        {
+            moveHorizontal = 0;
+        }
+
+        _rigidbody.velocity = new Vector2(
+            moveHorizontal, _rigidbody.velocity.y);
     }
 
     private void CheckGround()
-    {    
+    {
         var colliders = Physics2D.OverlapCircleAll(
-            _groundCheck.position, groundedRadius, _whatIsGround);
+            _groundCheck.position, groundedMinDistance, _whatIsGround);
 
         foreach (var collider in colliders)
         {
