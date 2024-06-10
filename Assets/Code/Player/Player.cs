@@ -1,21 +1,15 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Movable))]
-[RequireComponent(typeof(Animator))]
 public class Player : MonoBehaviour
 {
     private Movable _movable;
-    private Animator _animator;
-
-    private const string walkingBool = "walking";
-    private const string jumpingBool = "jumping";
-    private const string attackTrigger = "attack";
-    private const string dieTrigger = "die";
-    private const string hitTrigger = "hit";
-
+  
     [SerializeField] private Attacker _attacker;
 
-    private bool _isJumpingAnim = false;
+    public Attacker Attacker => _attacker;
+
+    public bool IsGrounded => _movable.IsGrounded;
 
     public bool LeftMoving { get; set; }
 
@@ -28,10 +22,8 @@ public class Player : MonoBehaviour
     private void Start()
     {
         _movable = GetComponent<Movable>();
-        _animator = GetComponent<Animator>();
-
-        _attacker.OnAttack += Attacker_OnAttack;
     }
+
     private void Update()
     {
         _movable.LeftMoving = LeftMoving;
@@ -42,31 +34,5 @@ public class Player : MonoBehaviour
         {
             _attacker.Attack();
         }
-
-        UpdateAnimator();
-    }
-
-    private void Attacker_OnAttack()
-    {
-        _animator.SetTrigger(attackTrigger);
-    }
-
-    private void FixedUpdate()
-    {
-        if (_movable.Jumping)
-        {
-            _isJumpingAnim = true;
-        }
-
-        if (_movable.IsGrounded)
-        {
-            _isJumpingAnim = false;
-        }
-    }
-
-    private void UpdateAnimator()
-    {
-        _animator.SetBool(walkingBool, _movable.LeftMoving | _movable.RightMoving);
-        _animator.SetBool(jumpingBool, _isJumpingAnim);
     }
 }
