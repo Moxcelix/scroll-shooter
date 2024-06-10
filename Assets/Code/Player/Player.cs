@@ -13,6 +13,8 @@ public class Player : MonoBehaviour
     private const string dieTrigger = "die";
     private const string hitTrigger = "hit";
 
+    [SerializeField] private Attacker _attacker;
+
     private bool _isJumpingAnim = false;
 
     public bool LeftMoving { get; set; }
@@ -27,8 +29,9 @@ public class Player : MonoBehaviour
     {
         _movable = GetComponent<Movable>();
         _animator = GetComponent<Animator>();
-    }
 
+        _attacker.OnAttack += Attacker_OnAttack;
+    }
     private void Update()
     {
         _movable.LeftMoving = LeftMoving;
@@ -37,10 +40,15 @@ public class Player : MonoBehaviour
 
         if (Attacking)
         {
-            Attack();
+            _attacker.Attack();
         }
 
         UpdateAnimator();
+    }
+
+    private void Attacker_OnAttack()
+    {
+        _animator.SetTrigger(attackTrigger);
     }
 
     private void FixedUpdate()
@@ -54,11 +62,6 @@ public class Player : MonoBehaviour
         {
             _isJumpingAnim = false;
         }
-    }
-
-    private void Attack()
-    {
-        _animator.SetTrigger(attackTrigger);
     }
 
     private void UpdateAnimator()

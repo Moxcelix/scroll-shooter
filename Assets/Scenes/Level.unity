@@ -235,7 +235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7eed0c602c8873b4ba64458a93da2803, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 0}
+  _player: {fileID: 1660486006}
   _rightKey: 100
   _leftKey: 97
   _jumpKey: 119
@@ -22907,10 +22907,11 @@ GameObject:
   - component: {fileID: 1660486001}
   - component: {fileID: 1660486000}
   - component: {fileID: 1660485999}
-  - component: {fileID: 1660486002}
   - component: {fileID: 1660486004}
-  - component: {fileID: 1660486006}
   - component: {fileID: 1660486007}
+  - component: {fileID: 1660486002}
+  - component: {fileID: 1660486006}
+  - component: {fileID: 1660486008}
   m_Layer: 6
   m_Name: Wizard
   m_TagString: Untagged
@@ -23066,6 +23067,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2b33bf6ea6732745a5f67005750f1a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _attacker: {fileID: 1660486008}
 --- !u!61 &1660486007
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -23111,6 +23113,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 2}
   m_EdgeRadius: 0
+--- !u!114 &1660486008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1660485998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62d4f085ee00ad646b6b60436f3951cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _coolDown: 0.5
 --- !u!1 &1661044765
 GameObject:
   m_ObjectHideFlags: 0
