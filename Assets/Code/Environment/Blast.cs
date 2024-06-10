@@ -25,6 +25,11 @@ public class Blast : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if((collision.gameObject.layer & _layerMask.value) != 0)
+        {
+            return;
+        }
+
         if(collision.TryGetComponent<Damageable>(out var damageable))
         {
             damageable.Damage(_power);
