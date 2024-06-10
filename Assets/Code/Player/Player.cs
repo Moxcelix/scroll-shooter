@@ -15,6 +15,14 @@ public class Player : MonoBehaviour
 
     private bool _isJumpingAnim = false;
 
+    public bool LeftMoving { get; set; }
+
+    public bool RightMoving { get; set; }
+
+    public bool Jumping { get; set; }
+
+    public bool Attacking { get; set; }
+
     private void Start()
     {
         _movable = GetComponent<Movable>();
@@ -23,11 +31,11 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        _movable.LeftMoving = Input.GetKey(KeyCode.A);
-        _movable.RightMoving = Input.GetKey(KeyCode.D);
-        _movable.Jumping = Input.GetKey(KeyCode.W);
+        _movable.LeftMoving = LeftMoving;
+        _movable.RightMoving = RightMoving;
+        _movable.Jumping = Jumping;
 
-        if (Input.GetMouseButtonDown(0))
+        if (Attacking)
         {
             Attack();
         }
