@@ -9,6 +9,19 @@ public class Blast : MonoBehaviour
 
     [SerializeField] private LayerMask _layerMask;
     [SerializeField] private float _power;
+    [SerializeField] private float _speed;
+
+    private bool _dead = false;
+
+    private void Update()
+    {
+        if (_dead)
+        {
+            return;
+        }
+
+        transform.position += _speed * Time.deltaTime * transform.right;
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -16,6 +29,10 @@ public class Blast : MonoBehaviour
         {
             damageable.Damage(_power);
         }
+
+        _dead = true;
+
+        OnDeath?.Invoke();
 
         Destroy(gameObject, despawnDelay);
     }
