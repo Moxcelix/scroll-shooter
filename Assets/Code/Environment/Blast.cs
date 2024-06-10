@@ -3,6 +3,7 @@ using UnityEngine;
 public class Blast : MonoBehaviour
 {
     private const float despawnDelay = 0.8f;
+    private const float maxExcistingTime = 10.0f;
 
     public delegate void OnDeathDelegate();
     public event OnDeathDelegate OnDeath;
@@ -12,6 +13,11 @@ public class Blast : MonoBehaviour
     [SerializeField] private float _speed;
 
     private bool _dead = false;
+
+    private void Start()
+    {
+        Destroy(gameObject, maxExcistingTime);
+    }
 
     private void Update()
     {

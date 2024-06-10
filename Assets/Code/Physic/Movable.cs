@@ -23,6 +23,8 @@ public class Movable : MonoBehaviour
 
     public bool Jumping { get; set; }
 
+    public bool Flip { get; set; }
+
     private void Start()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
@@ -30,9 +32,17 @@ public class Movable : MonoBehaviour
 
     private void FixedUpdate()
     {
+        UpdateFlip();
         CheckGround();
         UpdateJumping();
         UpdateMoving(Time.fixedDeltaTime);
+    }
+
+    private void UpdateFlip()
+    {
+        var scale = transform.localScale;
+        scale.x = Flip ? -Mathf.Abs(scale.x) : Mathf.Abs(scale.x);
+        transform.localScale = scale;
     }
 
     private void UpdateJumping()

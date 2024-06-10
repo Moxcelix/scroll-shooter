@@ -23158,7 +23158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62d4f085ee00ad646b6b60436f3951cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coolDown: 0.5
+  _coolDown: 0.3
   _blastPrefab: {fileID: 5659059369194879289, guid: fea417f193b6b324db500a0d4cae3c5c, type: 3}
   _origin: {fileID: 583961956}
   _delay: 0.15
