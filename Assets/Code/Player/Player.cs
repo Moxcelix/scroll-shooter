@@ -19,6 +19,8 @@ public class Player : MonoBehaviour
 
     public Attacker Attacker => _attacker;
 
+    public Damageable Damageable => _damageable;
+
     public float HP { get; private set; } = maxHp;
 
     public float Mana { get; private set; } = maxMana;

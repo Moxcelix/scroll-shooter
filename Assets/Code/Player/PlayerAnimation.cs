@@ -20,7 +20,13 @@ public class PlayerAnimation : MonoBehaviour
         _animator = GetComponent<Animator>();
         _player = GetComponent<Player>();
 
-        _player.Attacker.OnAttack += Attacker_OnAttack;
+        _player.Attacker.OnAttack += OnAttack;
+        _player.Damageable.OnDamage += OnDamage;
+    }
+
+    private void OnDamage(float damage)
+    {
+        _animator.SetTrigger(hitTrigger);
     }
 
     private void Update()
@@ -39,7 +45,7 @@ public class PlayerAnimation : MonoBehaviour
         _animator.SetBool(jumpingBool, _isJumpingAnim);
     }
 
-    private void Attacker_OnAttack()
+    private void OnAttack()
     {
         _animator.SetTrigger(attackTrigger);
     }

@@ -4,10 +4,13 @@ using UnityEngine;
 [RequireComponent(typeof(Damageable))]
 public class Enemy : MonoBehaviour
 {
-    private const float attackDistance = 2.0f;
+    private const float attackDistance = 2.5f;
+    private const float minDistance = 2.0f;
 
     public delegate void OnDeathDelegate();
     public event OnDeathDelegate OnDeath;
+
+    [SerializeField] private Attacker _attacker;
 
     private const float maxHp = 10.0f;
     private const float despawnDelay = 1.5f;
@@ -37,6 +40,15 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
+        if (IsDead)
+        {
+            _movable.Jumping = false;
+            _movable.RightMoving = false;
+            _movable.LeftMoving = false;
+
+            return;
+        }
+
         _movable.Jumping = true;
 
         UpdateMoving();
@@ -76,11 +88,6 @@ public class Enemy : MonoBehaviour
             return;
         }
 
-        if (IsDead)
-        {
-            return;
-        }
-
         var isLeft = _target.transform.position.x - transform.position.x < 0;
 
         _movable.Flip = isLeft;
@@ -91,10 +98,17 @@ public class Enemy : MonoBehaviour
 
         Debug.Log(distance);
 
-        if (distance < attackDistance)
+        if (distance < minDistance)
+        {
+            _movable.RightMoving = isLeft;
+            _movable.LeftMoving = !isLeft;
+        }
+        else if(distance < attackDistance)
         {
             _movable.RightMoving = false;
             _movable.LeftMoving = false;
+
+            _attacker.Attack();
         }
         else
         {
