@@ -1,13 +1,17 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Movable))]
+[RequireComponent(typeof(Damageable))]
 public class Player : MonoBehaviour
 {
     private Movable _movable;
+    private Damageable _damageable;
 
     [SerializeField] private Attacker _attacker;
 
     public Attacker Attacker => _attacker;
+
+    public float HP { get; private set; } = 10.0f;
 
     public bool IsGrounded => _movable.IsGrounded;
 
@@ -24,6 +28,9 @@ public class Player : MonoBehaviour
     private void Start()
     {
         _movable = GetComponent<Movable>();
+        _damageable = GetComponent<Damageable>();
+
+        _damageable.OnDamage += TakeDamage;
     }
 
     private void Update()
@@ -41,5 +48,10 @@ public class Player : MonoBehaviour
         _attacker.Direction = Flip ? 
             -transform.right :
             transform.right;
+    }
+
+    private void TakeDamage(float damage)
+    {
+        HP -= damage;
     }
 }
