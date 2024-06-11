@@ -4,12 +4,11 @@ using UnityEngine;
 [RequireComponent(typeof(Damageable))]
 public class Enemy : MonoBehaviour
 {
-    private const float attackDistance = 2.5f;
-    private const float minDistance = 2.0f;
-
     public delegate void OnDeathDelegate();
     public event OnDeathDelegate OnDeath;
 
+    [SerializeField] private float _attackDistance = 2.5f;
+    [SerializeField] private float _minDistance = 2.0f;
     [SerializeField] private Attacker _attacker;
 
     private const float maxHp = 10.0f;
@@ -23,6 +22,8 @@ public class Enemy : MonoBehaviour
     public bool IsDead { get; set; } = false;
 
     public Damageable Damageable => _damageable;
+
+    public Attacker Attacker => _attacker;
 
     public bool RightMoving => _movable.RightMoving;
 
@@ -98,12 +99,12 @@ public class Enemy : MonoBehaviour
 
         Debug.Log(distance);
 
-        if (distance < minDistance)
+        if (distance < _minDistance)
         {
             _movable.RightMoving = isLeft;
             _movable.LeftMoving = !isLeft;
         }
-        else if(distance < attackDistance)
+        else if(distance < _attackDistance)
         {
             _movable.RightMoving = false;
             _movable.LeftMoving = false;

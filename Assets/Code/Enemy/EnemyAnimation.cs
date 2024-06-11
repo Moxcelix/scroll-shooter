@@ -19,6 +19,12 @@ public class EnemyAnimation : MonoBehaviour
 
         _enemy.Damageable.OnDamage += Damage;
         _enemy.OnDeath += Die;
+        _enemy.Attacker.OnAttack += Attack;
+    }
+
+    private void Attack()
+    {
+        _animator.SetTrigger(attackTrigger);
     }
 
     private void Update()
