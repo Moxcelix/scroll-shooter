@@ -31,6 +31,11 @@ public class Blast : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.isTrigger)
+        {
+            return;
+        }
+
         if((collision.gameObject.layer & _layerMask.value) != 0)
         {
             return;

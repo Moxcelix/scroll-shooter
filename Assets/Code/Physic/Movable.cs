@@ -57,13 +57,15 @@ public class Movable : MonoBehaviour
 
     private void UpdateMoving(float deltaTime)
     {
+        Physics2D.queriesHitTriggers = false;
+
         var rightMove = RightMoving ? _speed : 0;
         var leftMove = LeftMoving ? _speed : 0;
         var move = rightMove - leftMove;
         var isTouchingWall = Physics2D.Raycast(
           _groundCheck.position,
           transform.right * Mathf.Sign(move),
-          _bodyCollider.size.x * 0.5f + wallMinDistance,
+          _bodyCollider.size.x * (0.5f + wallMinDistance),
           _whatIsGround);
 
         var moveHorizontal = Mathf.Lerp(
@@ -81,6 +83,8 @@ public class Movable : MonoBehaviour
 
     private void CheckGround()
     {
+        Physics2D.queriesHitTriggers = false;
+
         var colliders = Physics2D.OverlapCircleAll(
             _groundCheck.position, groundedMinDistance, _whatIsGround);
 

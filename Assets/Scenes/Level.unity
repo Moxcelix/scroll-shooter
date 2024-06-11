@@ -18247,7 +18247,8 @@ GameObject:
   - component: {fileID: 532065828}
   - component: {fileID: 532065832}
   - component: {fileID: 532065833}
-  m_Layer: 0
+  - component: {fileID: 532065834}
+  m_Layer: 8
   m_Name: Barbarian
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18336,7 +18337,7 @@ Transform:
   m_GameObject: {fileID: 532065824}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.47, y: 0.03, z: 0}
+  m_LocalPosition: {x: -1.1, y: 0.74, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -18379,12 +18380,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b9c3cca34904484795d59d7bb641152, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
-  _jumpForce: 1
+  _speed: 4
+  _jumpForce: 400
   _dampingSpeed: 100
   _whatIsGround:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 55
   _groundCheck: {fileID: 1318737382}
   _bodyCollider: {fileID: 532065832}
 --- !u!50 &532065831
@@ -18471,6 +18472,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bfe808ee1267804db759f36918a9a23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!58 &532065834
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532065824}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 2.25
 --- !u!1 &538550505
 GameObject:
   m_ObjectHideFlags: 0
@@ -21772,7 +21808,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1318737382}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Ground check
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21788,7 +21824,7 @@ Transform:
   m_GameObject: {fileID: 1318737381}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.04, z: 0}
+  m_LocalPosition: {x: 0, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

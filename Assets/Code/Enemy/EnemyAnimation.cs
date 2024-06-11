@@ -21,6 +21,11 @@ public class EnemyAnimation : MonoBehaviour
         _enemy.OnDeath += Die;
     }
 
+    private void Update()
+    {
+        _animator.SetBool(walkingBool, _enemy.LeftMoving |  _enemy.RightMoving);
+    }
+
     private void Damage(float damage)
     {
         if (_enemy.IsDead)
