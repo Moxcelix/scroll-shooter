@@ -13,11 +13,13 @@ public class Enemy : MonoBehaviour
     private Damageable _damageable;
     private Movable _movable;
 
-    private bool _isDead = false;
+    public bool IsDead { get; set; } = false;
+
+    public Damageable Damageable => _damageable;
 
     public float HP { get; private set; } = maxHp;
 
-    private void Start()
+    private void Awake()
     {
         _damageable = GetComponent<Damageable>();
         _movable = GetComponent<Movable>();
@@ -27,7 +29,7 @@ public class Enemy : MonoBehaviour
 
     private void OnDamage(float damage)
     {
-        if (_isDead)
+        if (IsDead)
         {
             return;
         }
@@ -36,7 +38,7 @@ public class Enemy : MonoBehaviour
 
         if (HP < 0)
         {
-            _isDead = true;
+            IsDead = true;
 
             OnDeath?.Invoke();
 
