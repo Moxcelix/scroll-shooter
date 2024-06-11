@@ -2,9 +2,8 @@ using UnityEngine;
 
 [RequireComponent(typeof(Enemy))]
 [RequireComponent(typeof(Animator))]
-public class EnemyAnimation : MonoBehaviour
+public class GargoyleAnimataion : MonoBehaviour
 {
-    private const string walkingBool = "walking";
     private const string attackTrigger = "attack";
     private const string dieTrigger = "die";
     private const string hitTrigger = "hit";
@@ -25,11 +24,6 @@ public class EnemyAnimation : MonoBehaviour
     private void Attack()
     {
         _animator.SetTrigger(attackTrigger);
-    }
-
-    private void Update()
-    {
-        _animator.SetBool(walkingBool, _enemy.LeftMoving |  _enemy.RightMoving);
     }
 
     private void Damage(float damage)

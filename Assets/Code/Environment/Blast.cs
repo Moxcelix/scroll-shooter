@@ -36,11 +36,6 @@ public class Blast : MonoBehaviour
             return;
         }
 
-        //if((collision.gameObject.layer & _layerMask.value) != 0)
-        //{
-        //    return;
-        //}
-
         if(collision.TryGetComponent<Damageable>(out var damageable))
         {
             damageable.Damage(_power);
