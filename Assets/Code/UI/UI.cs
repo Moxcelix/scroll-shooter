@@ -11,6 +11,7 @@ public class UI : MonoBehaviour
 
     private void Update()
     {
-        _hpText.text = $"HP:{_player.HP:.00}".Replace(',', '.');
+        _hpText.text = $"HP: {_player.HP:00.00}".Replace(',', '.');
+        _manaText.text = $"Mana: {_player.Mana:00.00}".Replace(',', '.');
     }
 }

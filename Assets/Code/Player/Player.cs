@@ -9,9 +9,13 @@ public class Player : MonoBehaviour
 
     [SerializeField] private Attacker _attacker;
 
+    [SerializeField] private float _manaConsumption; 
+
     public Attacker Attacker => _attacker;
 
     public float HP { get; private set; } = 10.0f;
+
+    public float Mana { get; private set; } = 10.0f;
 
     public bool IsGrounded => _movable.IsGrounded;
 
@@ -31,6 +35,7 @@ public class Player : MonoBehaviour
         _damageable = GetComponent<Damageable>();
 
         _damageable.OnDamage += TakeDamage;
+        _attacker.OnAttack += TakeMana;
     }
 
     private void Update()
@@ -41,7 +46,7 @@ public class Player : MonoBehaviour
 
         if (Attacking)
         {
-            _attacker.Attack();
+            Attack();
         }
 
         _movable.Flip = Flip;
@@ -50,8 +55,25 @@ public class Player : MonoBehaviour
             transform.right;
     }
 
+    private void Attack()
+    {
+        if(Mana <= 0)
+        {
+            Mana = 0;
+
+            return;
+        }
+
+        _attacker.Attack();
+    }
+
     private void TakeDamage(float damage)
     {
         HP -= damage;
+    }
+
+    private void TakeMana()
+    {
+        Mana -= _manaConsumption;
     }
 }

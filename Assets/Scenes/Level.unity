@@ -217,6 +217,7 @@ GameObject:
   - component: {fileID: 42629797}
   - component: {fileID: 42629796}
   - component: {fileID: 42629798}
+  - component: {fileID: 42629799}
   m_Layer: 0
   m_Name: Bootstrap
   m_TagString: Untagged
@@ -273,6 +274,22 @@ MonoBehaviour:
   _musicVolume: 0
   _soundVolume: 1
   _player: {fileID: 1660486006}
+--- !u!114 &42629799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 42629795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b0ab35eca6a6a04191ea6d8e1703a5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _player: {fileID: 1660486006}
+  _hpText: {fileID: 2067159396}
+  _scoreText: {fileID: 1739467971}
+  _manaText: {fileID: 1674944281}
 --- !u!1 &49059840
 GameObject:
   m_ObjectHideFlags: 0
@@ -23031,6 +23048,7 @@ GameObject:
   - component: {fileID: 1660486006}
   - component: {fileID: 1660486008}
   - component: {fileID: 1660486009}
+  - component: {fileID: 1660486010}
   m_Layer: 6
   m_Name: Wizard
   m_TagString: Untagged
@@ -23188,6 +23206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attacker: {fileID: 1660486008}
+  _manaConsumption: 0.5
 --- !u!61 &1660486007
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -23259,6 +23278,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 83aa087232db8024196215c130e1faea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1660486010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1660485998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28931e31876d5084e970e54691ae614c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1661044765
