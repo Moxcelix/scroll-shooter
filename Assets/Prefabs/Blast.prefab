@@ -186,7 +186,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _layerMask:
     serializedVersion: 2
-    m_Bits: 119
+    m_Bits: 54
   _power: 1
   _speed: 10
 --- !u!114 &6637722251414335004

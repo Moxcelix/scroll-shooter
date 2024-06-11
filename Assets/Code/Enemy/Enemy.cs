@@ -52,6 +52,10 @@ public class Enemy : MonoBehaviour
 
         _movable.Jumping = true;
 
+        _attacker.Direction = _movable.Flip ?
+            -transform.right :
+            transform.right;
+
         UpdateMoving();
     }
 
