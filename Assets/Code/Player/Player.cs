@@ -25,6 +25,8 @@ public class Player : MonoBehaviour
 
     public float Mana { get; private set; } = maxMana;
 
+    public float Score { get; private set; } = 0;
+
     public bool Reloading { get; private set; } = false;
 
     public bool IsGrounded => _movable.IsGrounded;
@@ -73,6 +75,11 @@ public class Player : MonoBehaviour
         }
 
         StartCoroutine(ReloadCycle());
+    }
+
+    public void AddScore(float score)
+    {
+        Score += score;
     }
 
     private IEnumerator ReloadCycle()
