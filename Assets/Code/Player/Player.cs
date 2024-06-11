@@ -82,6 +82,11 @@ public class Player : MonoBehaviour
         Score += score;
     }
 
+    public void Hill()
+    {
+        HP = maxHp;
+    }
+
     private IEnumerator ReloadCycle()
     {
         Reloading = true;

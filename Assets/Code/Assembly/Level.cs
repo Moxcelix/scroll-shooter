@@ -6,6 +6,8 @@ public class Level : MonoBehaviour
     [SerializeField] private float _coinBonus = 1.0f;
     [SerializeField] private Enemy[] _enemies;
     [SerializeField] private Player _player;
+    [SerializeField] private Item[] _hills;
+    [SerializeField] private Item[] _coins;
 
     private void Start()
     {
@@ -13,6 +15,26 @@ public class Level : MonoBehaviour
         {
             enemy.OnDeath += Enemy_OnDeath;
         }
+
+        foreach(var item in _coins)
+        {
+            item.OnPickup += Coin_OnPickup;
+        }
+
+        foreach(var item in _hills)
+        {
+            item.OnPickup += Hill_OnPickup;
+        }
+    }
+
+    private void Hill_OnPickup(Player player)
+    {
+        player.Hill();
+    }
+
+    private void  Coin_OnPickup(Player player)
+    {
+        player.AddScore(_coinBonus);
     }
 
     private void Enemy_OnDeath()
