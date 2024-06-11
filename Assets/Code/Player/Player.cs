@@ -4,7 +4,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     private Movable _movable;
-  
+
     [SerializeField] private Attacker _attacker;
 
     public Attacker Attacker => _attacker;
@@ -18,6 +18,8 @@ public class Player : MonoBehaviour
     public bool Jumping { get; set; }
 
     public bool Attacking { get; set; }
+
+    public bool Flip { get; set; }  
 
     private void Start()
     {
@@ -34,5 +36,10 @@ public class Player : MonoBehaviour
         {
             _attacker.Attack();
         }
+
+        _movable.Flip = Flip;
+        _attacker.Direction = Flip ? 
+            -transform.right :
+            transform.right;
     }
 }
