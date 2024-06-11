@@ -1,9 +1,15 @@
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Movable))]
 [RequireComponent(typeof(Damageable))]
 public class Player : MonoBehaviour
 {
+    private const float maxHp = 10.0f;
+    private const float maxMana = 10.0f;
+
+    private readonly WaitForSeconds _reloadDelay = new (3.0f);
+
     private Movable _movable;
     private Damageable _damageable;
 
@@ -13,9 +19,11 @@ public class Player : MonoBehaviour
 
     public Attacker Attacker => _attacker;
 
-    public float HP { get; private set; } = 10.0f;
+    public float HP { get; private set; } = maxHp;
 
-    public float Mana { get; private set; } = 10.0f;
+    public float Mana { get; private set; } = maxMana;
+
+    public bool Reloading { get; private set; } = false;
 
     public bool IsGrounded => _movable.IsGrounded;
 
@@ -53,6 +61,27 @@ public class Player : MonoBehaviour
         _attacker.Direction = Flip ? 
             -transform.right :
             transform.right;
+    }
+
+    public void Reload()
+    {
+        if(Mana > 0)
+        {
+            return;
+        }
+
+        StartCoroutine(ReloadCycle());
+    }
+
+    private IEnumerator ReloadCycle()
+    {
+        Reloading = true;
+
+        yield return _reloadDelay;
+
+        Mana = maxMana;
+
+        Reloading = false;
     }
 
     private void Attack()
