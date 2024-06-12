@@ -21,6 +21,8 @@ public class Player : MonoBehaviour
 
     public Damageable Damageable => _damageable;
 
+    public bool IsDead { get; private set; } = false;
+
     public float HP { get; private set; } = maxHp;
 
     public float Mana { get; private set; } = maxMana;
@@ -41,7 +43,7 @@ public class Player : MonoBehaviour
 
     public bool Flip { get; set; }  
 
-    private void Start()
+    private void Awake()
     {
         _movable = GetComponent<Movable>();
         _damageable = GetComponent<Damageable>();
@@ -52,6 +54,11 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        if (IsDead)
+        {
+            return;
+        }
+
         _movable.LeftMoving = LeftMoving;
         _movable.RightMoving = RightMoving;
         _movable.Jumping = Jumping;
@@ -113,6 +120,11 @@ public class Player : MonoBehaviour
     private void TakeDamage(float damage)
     {
         HP -= damage;
+
+        if(HP <= 0)
+        {
+            IsDead = true;
+        }
     }
 
     private void TakeMana()

@@ -35,4 +35,14 @@ public class SoundManager : MonoBehaviour
     {
         _musicAudioSource.volume = _musicVolume;
     }
+
+    public void SetMusicVolume(float volume)
+    {
+        _musicVolume = volume;
+    }
+
+    public void SetSoundVolume(float volume)
+    {
+        _soundVolume = volume;
+    }
 }

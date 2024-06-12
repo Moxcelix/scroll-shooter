@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Level : MonoBehaviour
 {
@@ -11,20 +12,41 @@ public class Level : MonoBehaviour
 
     private void Start()
     {
-        foreach(var enemy in _enemies)
+        foreach (var enemy in _enemies)
         {
             enemy.OnDeath += Enemy_OnDeath;
         }
 
-        foreach(var item in _coins)
+        foreach (var item in _coins)
         {
             item.OnPickup += Coin_OnPickup;
         }
 
-        foreach(var item in _hills)
+        foreach (var item in _hills)
         {
             item.OnPickup += Hill_OnPickup;
         }
+    }
+
+    private void Update()
+    {
+        if (_player.IsDead)
+        {
+            PlayerPrefs.SetFloat("score", _player.Score);
+            SceneManager.LoadScene(2);
+        }
+    }
+
+    public void Win()
+    {
+        PlayerPrefs.SetFloat("score", _player.Score);
+        SceneManager.LoadScene(3);
+    }
+
+    public void Lose()
+    {
+        PlayerPrefs.SetFloat("score", _player.Score);
+        SceneManager.LoadScene(2);
     }
 
     private void Hill_OnPickup(Player player)
@@ -32,7 +54,7 @@ public class Level : MonoBehaviour
         player.Hill();
     }
 
-    private void  Coin_OnPickup(Player player)
+    private void Coin_OnPickup(Player player)
     {
         player.AddScore(_coinBonus);
     }

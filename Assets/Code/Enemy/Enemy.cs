@@ -101,8 +101,6 @@ public class Enemy : MonoBehaviour
             _target.transform.position.x -
             transform.position.x);
 
-        Debug.Log(distance);
-
         if (distance < _minDistance)
         {
             _movable.RightMoving = isLeft;

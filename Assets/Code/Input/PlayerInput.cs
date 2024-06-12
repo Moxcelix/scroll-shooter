@@ -8,8 +8,25 @@ public class PlayerInput : MonoBehaviour
     [SerializeField] private KeyCode _jumpKey = KeyCode.W;
     [SerializeField] private KeyCode _reloadKey = KeyCode.R;
 
+    public bool IsPause { get; private set; } = false;
+
+    public void Unpause()
+    {
+        IsPause = false;
+    }
+
     private void Update()
     {
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            IsPause = !IsPause;
+        }
+
+        if (IsPause)
+        {
+            return;
+        }
+
         var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         _player.RightMoving = Input.GetKey(_rightKey);

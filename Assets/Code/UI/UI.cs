@@ -4,6 +4,8 @@ using UnityEngine.UI;
 public class UI : MonoBehaviour
 {
     [SerializeField] private Player _player;
+    [SerializeField] private GameObject _pauseMenu;
+    [SerializeField] private PlayerInput _playerInput;
 
     [SerializeField] private Text _hpText;
     [SerializeField] private Text _scoreText;
@@ -14,6 +16,12 @@ public class UI : MonoBehaviour
     {
         ShowStats();
         ShowHint();
+        ShowPauseMenu();
+    }
+
+    private void ShowPauseMenu()
+    {
+        _pauseMenu.SetActive(_playerInput.IsPause);
     }
 
     private void ShowStats()
